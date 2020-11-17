@@ -15,8 +15,8 @@ RUN apk update \
  && apk add jq \
  && apk add curl \
  && apk add bash \
- && apk add --update docker
- && apk add --update openrc
+ && apk add --update docker \
+ && apk add --update openrc \
  && rm -rf /var/cache/apk/*
 
 RUN rc-update add docker boot
