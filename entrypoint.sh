@@ -20,6 +20,12 @@ if [ "$ASSUME_ROLE_ARN" != "" ]; then
   export AWS_REGION=${REGION}
 fi
 
+if [ "$DOCKERFILE" == ""]; then
+  export DOCKERFILE="Dockerfile"
+else
+  export DOCKERFILE=${DOCKERFILE}
+fi
+
 aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com
-docker build -f ./Dockerfile -t ${ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com/${REPO}:${TAG} .
+docker build -f ${DOCKERFILE} -t ${ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com/${REPO}:${TAG} .
 docker push ${ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com/${REPO}:${TAG}
