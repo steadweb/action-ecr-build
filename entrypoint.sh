@@ -20,7 +20,7 @@ if [ "$ASSUME_ROLE_ARN" != "" ]; then
   export AWS_REGION=${REGION}
 fi
 
-if [ "$DOCKERFILE" != ""]; then
+if [ "$DOCKERFILE" != "" ]; then
   export DOCKERFILE=$DOCKERFILE
 else
   export DOCKERFILE="Dockerfile"
