@@ -21,10 +21,12 @@ if [ "$ASSUME_ROLE_ARN" != "" ]; then
 fi
 
 if [ "$DOCKERFILE" != ""]; then
-  export DOCKERFILE=${DOCKERFILE}
+  export DOCKERFILE=$DOCKERFILE
 else
   export DOCKERFILE="Dockerfile"
 fi
+
+echo "Using Dockerfile: $DOCKERFILE"
 
 aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com
 docker build -f ${DOCKERFILE} -t ${ACCOUNT_ID}.dkr.ecr.eu-west-2.amazonaws.com/${REPO}:${TAG} .
